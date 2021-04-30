@@ -1,0 +1,10 @@
+# This file tracks properties of this Flutter project.
+# Used by Flutter tool to assess capabilities and perform upgrades etc.
+#
+# This file should be version controlled and should not be manually edited.
+
+version:
+  revision: 5a21dd333c7eca315b95916ac2ae3a74bb3ae891
+  channel: stable
+
+project_type: app

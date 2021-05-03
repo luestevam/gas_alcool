@@ -21,13 +21,21 @@ class _HomeState extends State<Home> {
         });
 
       } else {
-        setState(() {
-          _textoResultado = "Número valido, faça o calculo";
-        });
+        if ( (precoAlcool / precoGasolina) >= 0.7) {
+          setState(() {
+            _textoResultado = "Melhor Abastecer com Gasolina";
+          });
+
+        } else {
+          setState(() {
+            _textoResultado = "Melhor Abastecer com Álcool";
+          });
+
+        }
+      }
       }
 
 
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,26 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   TextEditingController _controllerAlcool = TextEditingController();
   TextEditingController _controllerGasolina = TextEditingController();
+  String _textoResultado = "";
+
+  void _calcular(){
+
+      double precoAlcool = double.tryParse( _controllerAlcool.text );
+      double precoGasolina = double.tryParse( _controllerGasolina.text );
+      if (precoAlcool == null || precoGasolina == null) {
+
+        setState(() {
+          _textoResultado = "Número inválido, digite números maiores que 0 e utilizando ponto (.)";
+        });
+
+      } else {
+        setState(() {
+          _textoResultado = "Número valido, faça o calculo";
+        });
+      }
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +42,7 @@ class _HomeState extends State<Home> {
           child: SingleChildScrollView(
             padding: EdgeInsets.all(32),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(bottom: 32),
@@ -37,7 +58,7 @@ class _HomeState extends State<Home> {
                 TextField(
                   keyboardType: TextInputType.number,
                   decoration:
-                      InputDecoration(labelText: "Preço Alcool, ex 1.59"),
+                      InputDecoration(labelText: "Preço Álcool, ex 1.59"),
                   style: TextStyle(
                     fontSize: 22,
                   ),
@@ -46,16 +67,30 @@ class _HomeState extends State<Home> {
                 TextField(
                   keyboardType: TextInputType.number,
                   decoration:
-                      InputDecoration(labelText: "Preço Alcool, ex 2.59"),
+                      InputDecoration(labelText: "Preço Gasolina, ex 3.59"),
                   style: TextStyle(fontSize: 22),
                   controller: _controllerGasolina,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(top: 20),
                   child: RaisedButton(
-                    child: Text("Calcular"),
-                    onPressed: () {},
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                      "Calcular",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    onPressed: _calcular,
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Text(_textoResultado,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold
+                  ),),
                 ),
               ],
             ),

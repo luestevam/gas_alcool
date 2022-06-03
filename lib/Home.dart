@@ -10,6 +10,36 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   TextEditingController _controllerAlcool = TextEditingController();
   TextEditingController _controllerGasolina = TextEditingController();
+  String _textoResultado = "";
+
+  void _calcular() {
+    double? precoAlcool = double.tryParse(_controllerAlcool.text);
+    double? precoGasolina = double.tryParse(_controllerGasolina.text);
+
+    if (precoAlcool == null || precoGasolina == null) {
+      setState(() {
+        _textoResultado =
+            "Número inválido, digite números maiores que 0 e utilizando .";
+      });
+    } else {
+      if ((precoAlcool / precoGasolina) >= 0.7) {
+        setState(() {
+          _textoResultado = "Melhor abastecer com gasolina";
+        });
+      } else {
+        setState(() {
+          _textoResultado = "melhor abastecer com alcool";
+        });
+      }
+    }
+  }
+
+  void _limparCampos() {
+    _controllerAlcool.text = "";
+    _controllerGasolina.text = "";
+    _textoResultado = "";
+    _limparCampos();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +89,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _calcular,
                       child: Text(
                         'Calcular',
                         style: TextStyle(fontSize: 20),
@@ -72,7 +102,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _limparCampos,
                       child: Text(
                         'Limpar',
                         style: TextStyle(fontSize: 20, color: Colors.red),
@@ -84,7 +114,7 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: EdgeInsets.only(top: 20),
                 child: Text(
-                  'Resultado',
+                  '$_textoResultado',
                   style: TextStyle(fontSize: 22),
                 ),
               ),

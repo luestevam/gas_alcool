@@ -1,9 +1,8 @@
+import 'package:alcool_gas/home.dart';
 import 'package:flutter/material.dart';
-import 'package:gas_alcool/Home.dart';
 
-void main(){
+void main() {
   runApp(MaterialApp(
     home: Home(),
-
   ));
 }
